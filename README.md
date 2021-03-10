@@ -83,3 +83,7 @@ if_bxe_load="YES"
 That's it! It should be set up, no funky VLAN or CoS tagging required, should be just plug and play and you can safely store your Google-provided gateway for it's not needed anymore.
 
 See reddit thread [here](https://old.reddit.com/r/googlefiber/comments/lscvj5/2gbps_gateway_bypass_confirmed_full_speed_working/) for some discussion and other questions.
+
+# Notes
+
+Updates may (and most likely will) replace your if_bxe.ko driver back to what comes with the original install. Be prepared to need to copy it again after you update pf/opnsense. Luckily, the driver still works but will not negotiate 2.5Gbps correctly, so you'll be stuck at 1Gbps until you re-copy the file over and reboot.
