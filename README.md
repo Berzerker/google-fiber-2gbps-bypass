@@ -84,11 +84,11 @@ That's it! It should be set up, no funky VLAN or CoS tagging required, should be
 
 See reddit thread [here](https://old.reddit.com/r/googlefiber/comments/lscvj5/2gbps_gateway_bypass_confirmed_full_speed_working/) for some discussion and other questions.
 
-## Revert Back to 10G (pfsense)
+### Revert Back to 10G (pfSense)
+If you previously followed the instructions for bypassing the 10G limit, you may want to revert your network card back to its original state. This is also necessary if you plan to use the BCM card connected to a switch.
 
+Follow steps 1-5 under "Modifying the Card."
 1) Follow steps 1-5 under Modifying the Card
-
-
 ```
 device 1
 nvm cfg
@@ -97,16 +97,14 @@ nvm cfg
 save
 exit
 ```
-
-
-At this point, hardware modifications should be done. 
-2) Remove the modifed if_bxe.ko file from /boot/kernel on pfsense.
+2)At this point, hardware modifications should be done. 
+3) Remove the modified if_bxe.ko file from /boot/kernel on pfSense.
 ```
-rm if_bxe.ko
-mv if_bxe.bak if_bxe.ko
+rm /boot/kernel/if_bxe.ko
+mv /boot/kernel/if_bxe.bak /boot/kernel/if_bxe.ko
 ```
 
-4) Reboot your box, at this point you should see the link come "UP" and indicate 10000.
+4) Reboot your box. You should see the link come "UP" and indicate 10000, indicating that the network card has been reverted back to its default 10G state.
 
 # Notes
 
