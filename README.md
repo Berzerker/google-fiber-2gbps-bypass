@@ -85,7 +85,7 @@ That's it! It should be set up, no funky VLAN or CoS tagging required, should be
 See reddit thread [here](https://old.reddit.com/r/googlefiber/comments/lscvj5/2gbps_gateway_bypass_confirmed_full_speed_working/) for some discussion and other questions.
 
 ### Reverting Back to 10Gb (pfSense)
-If you previously followed the instructions for bypassing the 10Gb limit, you may want to revert your network card back to its original state.
+If you previously followed the instructions for changing the port speed, you may want to revert your network card back to its original state.
 1) Follow steps 1-5 under Modifying the Card
 ```
 device 1
