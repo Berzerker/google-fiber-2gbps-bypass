@@ -84,6 +84,25 @@ That's it! It should be set up, no funky VLAN or CoS tagging required, should be
 
 See reddit thread [here](https://old.reddit.com/r/googlefiber/comments/lscvj5/2gbps_gateway_bypass_confirmed_full_speed_working/) for some discussion and other questions.
 
+### Reverting Back to 10Gb (pfSense)
+If you previously followed the instructions for bypassing the 10Gb limit, you may want to revert your network card back to its original state.
+1) Follow steps 1-5 under Modifying the Card
+```
+device 1
+nvm cfg
+56=7
+59=7
+save
+exit
+```
+2) At this point, hardware modifications should be done. 
+3) Remove the modified if_bxe.ko file from /boot/kernel on pfSense and replace it with the orginal backup we made.
+```
+rm /boot/kernel/if_bxe.ko
+mv /boot/kernel/if_bxe.bak /boot/kernel/if_bxe.ko
+```
+4) Reboot your box. You should see the link come "UP" and indicate 10000, indicating that the network card has been reverted back to its default 10Gb state.
+
 # Notes
 
 Updates may (and most likely will) replace your if_bxe.ko driver back to what comes with the original install. Be prepared to need to copy it again after you update pf/opnsense. Luckily, the driver still works but will not negotiate 2.5Gbps correctly, so you'll be stuck at 1Gbps until you re-copy the file over and reboot.
